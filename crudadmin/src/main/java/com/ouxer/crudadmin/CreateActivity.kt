@@ -30,22 +30,24 @@ class CreateActivity : AppCompatActivity() {
         }
 
         binding.btnGuardar.setOnClickListener {
+
             val fechaEstablecida = binding.tvFecha.text.toString()
             refBaseDeDatos = FirebaseDatabase.getInstance().getReference("Fecha Establecida")
             val datoFecha = DatoFecha(fechaEstablecida)
+
             refBaseDeDatos.child(fechaEstablecida).setValue(datoFecha).addOnSuccessListener {
                 binding.tvFecha.text.clear() // esto limpia el text view
 
                 // muestra un pequeño aviso de que se subió correctamente
-                Toast.makeText(this, "Fecha guardada.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fecha guardada.", Toast.LENGTH_LONG).show()
 
                 // cambio de vista
-                val intent = Intent(this@CreateActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                //val intent = Intent(this@CreateActivity, MainActivity::class.java)
+                //startActivity(intent)
+                //finish()
             }.addOnFailureListener {
                 // Mensaje en caso de falla
-                Toast.makeText(this, "Operación fallida.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Operación fallida.", Toast.LENGTH_LONG).show()
 
             }
         }
