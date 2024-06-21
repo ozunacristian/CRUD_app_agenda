@@ -3,6 +3,7 @@ package com.ouxer.crudadmin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,12 +23,23 @@ class CreateActivity : AppCompatActivity() {
         binding = ActivityCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Probamos de usar el boton de "atras" para terminar la actividad acutual(CreateActivity) y lanzar la vista MainActivity
+        // Se sobreescribe la función del botón atras del sistema.
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@CreateActivity, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+
+        /*/ Probamos de usar el boton de "atras" para terminar la actividad acutual(CreateActivity) y lanzar la vista MainActivity
         binding.btnAtras.setOnClickListener {
             val intent = Intent(this@CreateActivity, MainActivity::class.java)
             startActivity(intent) // Inicia la pantalla MainActivity
             finish() // finaliza la pantalla actual (la cierra)
-        }
+        }*/
+
 
         binding.btnGuardar.setOnClickListener {
 
