@@ -1,17 +1,17 @@
 package com.ouxer.crudadmin
 
+
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.ouxer.crudadmin.databinding.ActivityCreateBinding
-import com.ouxer.crudadmin.databinding.ActivityMainBinding
+
 
 class CreateActivity : AppCompatActivity() {
 
@@ -39,7 +39,16 @@ class CreateActivity : AppCompatActivity() {
             startActivity(intent) // Inicia la pantalla MainActivity
             finish() // finaliza la pantalla actual (la cierra)
         }*/
+        // ---------------- Spinners ----------------------------------
+        val materias : Spinner = binding.spMaterias
 
+        // ---------Harcodeo lista materia
+        val listaMaterias = arrayOf("Materia", "Materia 01","Materia 02","Materia 03","Materia 04", "Materia 05")
+        val adaptMaterias = ArrayAdapter<String>(this, R.layout.spinner_item, listaMaterias)
+
+        materias.adapter = adaptMaterias
+
+        // ------------------------------------------------------------
 
         binding.btnGuardar.setOnClickListener {
 
@@ -53,10 +62,6 @@ class CreateActivity : AppCompatActivity() {
                 // muestra un pequeño aviso de que se subió correctamente
                 Toast.makeText(this, "Fecha guardada.", Toast.LENGTH_LONG).show()
 
-                // cambio de vista
-                //val intent = Intent(this@CreateActivity, MainActivity::class.java)
-                //startActivity(intent)
-                //finish()
             }.addOnFailureListener {
                 // Mensaje en caso de falla
                 Toast.makeText(this, "Operación fallida.", Toast.LENGTH_LONG).show()
